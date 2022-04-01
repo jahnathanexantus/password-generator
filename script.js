@@ -6,6 +6,64 @@ const uppercase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "
 const lowercase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 // Assignment Code
+var choiceArray = []
+
+
+
+function generatePassword() {
+  var userAnswer = prompt("How many characters would you like your password to contain")
+  console.log(userAnswer);
+  if (isNaN(userAnswer) || userAnswer < 8 || userAnswer > 128){
+    alert("Please enter a valid number between 8 & 32.")
+    generatePassword();
+  }
+  
+  specialK= confirm("Click ok to confirm including special characters")
+
+  if (specialK) {
+  choiceArray = choiceArray.concat(specialChars);
+  }
+  var numericChar = confirm("Click ok to confirm including numeric characters")
+
+  if (numericChar){
+  choiceArray = choiceArray.concat(numberChars);
+  };
+  var lowerCase = confirm("Click ok to confirm including lowercase characters")
+
+  if (lowerCase) {
+  choiceArray = choiceArray.concat(lowercase);
+  };
+  var upperCase = confirm("Click ok to confirm including uppercase characters")
+
+  if (upperCase) {
+  choiceArray = choiceArray.concat(uppercase);
+  }
+
+  if (!specialK  && !numericChar && !lowerCase && !upperCase){
+    alert("You must pick one option")
+    generatePassword();
+  }
+  var mixPassword = "";
+  for (let i = 0; i < userAnswer; i++) {
+    mixPassword += choiceArray[Math.floor(Math.random() * choiceArray.length)];
+    
+  }  
+  return mixPassword
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -19,18 +77,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-
-function generatePassword() {
-  var firstPrompt = prompt("How many characters would you like your password to contain")
-  console.log(firstPrompt);
-  if (isNaN(firstPrompt)){
-    alert("Please enter a valid number between 8 & 32.")
-    generatePassword()
-  }
-  if (firstPrompt <8 || firstPrompt > 128){
-    alert("please enter a valid number between 8 and 128. ")
-  }
-
-};
