@@ -11,14 +11,19 @@ var choiceArray = []
 
 
 function generatePassword() {
+  // create prompt
   var userAnswer = prompt("How many characters would you like your password to contain")
   console.log(userAnswer);
+  if (!userAnswer){
+    process.exit()
+  }
   if (isNaN(userAnswer) || userAnswer < 8 || userAnswer > 128){
-    alert("Please enter a valid number between 8 & 32.")
+    alert("Please enter a valid number between 8 & 128.")
     generatePassword();
   }
-  
+  // create first confirm
   specialK= confirm("Click ok to confirm including special characters")
+  // create second confirm
 
   if (specialK) {
   choiceArray = choiceArray.concat(specialChars);
@@ -43,6 +48,7 @@ function generatePassword() {
     alert("You must pick one option")
     generatePassword();
   }
+  // create password generator
   var mixPassword = "";
   for (let i = 0; i < userAnswer; i++) {
     mixPassword += choiceArray[Math.floor(Math.random() * choiceArray.length)];
